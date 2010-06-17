@@ -689,7 +689,9 @@ $.extend($.ui.dialog.overlay, {
 				if ($.ui.dialog.overlay.instances.length) {
 					$(document).bind($.ui.dialog.overlay.events, function(event) {
 						// stop events if the z-index of the target is < the z-index of the overlay
-						return ($(event.target).zIndex() >= $.ui.dialog.overlay.maxZ);
+						if ($(event.target).zIndex() < $.ui.dialog.overlay.maxZ) {
+							return false;
+						}
 					});
 				}
 			}, 1);
